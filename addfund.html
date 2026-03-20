@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GrowX Add Funds</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+
+body{
+background: radial-gradient(circle at top,#0b1d3a,#020814);
+color:white;
+display:flex;
+justify-content:center;
+padding:20px;
+}
+
+.container{width:100%;max-width:420px;}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.title{font-size:22px;font-weight:600;}
+.balance{opacity:.8;}
+
+.card{
+background:rgba(255,255,255,0.04);
+backdrop-filter:blur(20px);
+border-radius:22px;
+padding:25px;
+margin-bottom:25px;
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:0 0 30px rgba(0,150,255,.3);
+}
+
+.qr{text-align:center;margin-bottom:20px;}
+
+.qr img{
+width:180px;
+border-radius:10px;
+margin:15px 0;
+}
+
+.copy-btn{
+background:linear-gradient(45deg,#ffd54f,#ff9800);
+border:none;
+padding:7px 16px;
+border-radius:20px;
+cursor:pointer;
+margin-top:8px;
+box-shadow:0 0 10px rgba(255,180,0,.8);
+}
+
+.input{
+width:100%;
+padding:14px;
+margin-top:12px;
+border-radius:30px;
+border:2px solid rgba(255,255,255,0.15);
+background:transparent;
+color:white;
+outline:none;
+}
+
+.submit{
+width:100%;
+margin-top:18px;
+padding:15px;
+border:none;
+border-radius:40px;
+font-size:16px;
+font-weight:600;
+background:linear-gradient(45deg,#ffd54f,#ff9800);
+cursor:pointer;
+}
+
+.table-wrap{
+overflow-x:auto;
+margin-top:15px;
+}
+
+table{
+width:100%;
+min-width:380px;
+border-collapse:collapse;
+}
+
+th{
+opacity:.7;
+font-weight:500;
+}
+
+th,td{
+padding:12px;
+text-align:center;
+border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+.pending{color:#ffc107;}
+.approved{color:#00ff9c;}
+.rejected{color:#ff4d4d;}
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(0,0,0,.6);
+z-index:999;
+}
+
+.hidden{display:none;}
+
+.popup-card{
+background:#111;
+padding:30px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 0 40px rgba(255,215,0,.8);
+}
+
+.icon{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.success{color:#00ff9c;}
+.error{color:#ff4d4d;}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+<div class="title">Add Funds</div>
+<div class="balance">Balance ₹<span id="balance">0</span></div>
+</div>
+
+<div class="card">
+
+<div class="qr">
+
+<h2>Scan & Pay</h2>
+
+<img src="qr.png">
+
+<p>UPI ID: ravikishanm90@fam</p>
+
+<button class="copy-btn" onclick="copyUpi()">Copy UPI</button>
+
+</div>
+
+<input id="amount" class="input" placeholder="Enter amount (min ₹100)">
+<input id="utr" class="input" placeholder="Enter UTR / Transaction ID">
+
+<button class="submit" onclick="payUPI()">Pay via UPI App</button>
+
+<button id="submitBtn" class="submit" onclick="submitPayment()">
+Submit Payment
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Payment History</h2>
+
+<div class="table-wrap">
+
+<table id="paymentTable">
+<tr>
+<th>Amount</th>
+<th>UTR</th>
+<th>Status</th>
+<th>Date</th>
+</tr>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="popup" class="popup hidden">
+<div class="popup-card">
+<div id="popupIcon" class="icon"></div>
+<div id="popupText"></div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const supabaseClient = window.supabase.createClient(
+"https://sgabwjdydpdhjhzgncmq.supabase.co",
+"sb_publishable_uGNWbH6gSVTBbTRotRGXQQ_a7n_mtzb"
+);
+
+const userID = localStorage.getItem("userID");
+
+if(!userID){
+location.href="index.html";
+}
+
+/* BALANCE LOAD */
+async function loadBalance(){
+
+let { data } = await supabaseClient
+.from("USER")
+.select("BALANCE")
+.eq("USERID", userID)
+.single();
+
+if(data){
+document.getElementById("balance").innerText = data.BALANCE;
+}
+
+}
+
+loadBalance();
+
+/* COPY */
+function copyUpi(){
+navigator.clipboard.writeText("ravikishanm90@fam");
+showPopup("UPI ID Copied","success");
+}
+
+/* POPUP */
+function showPopup(msg,type){
+
+const popup=document.getElementById("popup");
+const icon=document.getElementById("popupIcon");
+const text=document.getElementById("popupText");
+
+text.innerText=msg;
+
+if(type=="success"){
+icon.innerHTML="✔";
+icon.className="icon success";
+}else{
+icon.innerHTML="⚠";
+icon.className="icon error";
+}
+
+popup.classList.remove("hidden");
+
+setTimeout(()=>{
+popup.classList.add("hidden");
+},2000);
+
+}
+
+/* UPI PAY */
+function payUPI(){
+
+let amount = document.getElementById("amount").value.trim();
+
+if(!amount){
+showPopup("Enter amount first","error");
+return;
+}
+
+let upi = `upi://pay?pa=ravikishanm90@fam&pn=GrowX&am=${amount}&cu=INR`;
+
+window.location.href = upi;
+
+}
+
+/* SUBMIT PAYMENT */
+async function submitPayment(){
+
+const btn=document.getElementById("submitBtn");
+
+let amount=document.getElementById("amount").value.trim();
+let utr=document.getElementById("utr").value.trim();
+
+if(!amount || !utr){
+showPopup("Fill all fields","error");
+return;
+}
+
+if(Number(amount)<100){
+showPopup("Minimum ₹100","error");
+return;
+}
+
+/* DUPLICATE CHECK */
+let { data:check } = await supabaseClient
+.from("PAYMENT")
+.select("*")
+.eq("UTR", utr);
+
+if(check.length > 0){
+showPopup("Duplicate UTR ❌","error");
+return;
+}
+
+btn.disabled=true;
+btn.innerText="Processing...";
+
+/* INSERT */
+await supabaseClient.from("PAYMENT").insert([{
+USERID:userID,
+AMOUNT:amount,
+UTR:utr,
+STATUS:"Pending",
+DATE:new Date()
+}]);
+
+showPopup("Payment Submitted","success");
+
+setTimeout(()=>{
+location.reload();
+},1500);
+
+}
+
+/* PAYMENT HISTORY */
+async function loadPayments(){
+
+let { data } = await supabaseClient
+.from("PAYMENT")
+.select("*")
+.eq("USERID", userID)
+.order("DATE",{ascending:false});
+
+const table=document.getElementById("paymentTable");
+
+if(!data) return;
+
+data.forEach(p=>{
+table.innerHTML+=`
+<tr>
+<td>₹${p.AMOUNT}</td>
+<td>${p.UTR}</td>
+<td class="${p.STATUS.toLowerCase()}">${p.STATUS}</td>
+<td>${new Date(p.DATE).toLocaleString()}</td>
+</tr>
+`;
+});
+
+}
+
+loadPayments();
+
+</script>
+
+</body>
+</html>

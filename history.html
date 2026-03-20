@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GrowX • Order History</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+background:#0B0F19;
+color:white;
+min-height:100vh;
+overflow-x:hidden;
+}
+
+.topbar{
+height:65px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(255,215,0,0.05);
+backdrop-filter:blur(20px);
+border-bottom:1px solid rgba(255,215,0,0.2);
+}
+
+.brand{
+font-size:22px;
+font-weight:700;
+background:linear-gradient(90deg,#FFD700,#fff,#FFD700);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.container{padding:20px;}
+
+.summary{
+background:rgba(255,215,0,0.05);
+border:1px solid rgba(255,215,0,0.2);
+border-radius:20px;
+padding:15px;
+margin-bottom:20px;
+display:flex;
+justify-content:space-between;
+}
+
+.summaryBox{text-align:center;flex:1;}
+
+.summaryBox h3{color:#FFD700;}
+
+.orderCard{
+background:rgba(255,215,0,0.05);
+border:1px solid rgba(255,215,0,0.2);
+border-radius:20px;
+padding:16px;
+margin-bottom:15px;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+margin-bottom:6px;
+font-size:14px;
+word-break:break-word;
+}
+
+.status{
+padding:5px 12px;
+border-radius:20px;
+font-size:12px;
+font-weight:600;
+}
+
+.pending{background:#ffaa0022;color:#ffaa00;}
+.completed{background:#00ff8822;color:#00ff88;}
+.cancelled{background:#ff444422;color:#ff4444;}
+
+.empty{
+text-align:center;
+margin-top:60px;
+opacity:.7;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+<div class="brand">GrowX</div>
+</div>
+
+<div class="container">
+
+<div class="summary">
+<div class="summaryBox">
+<h3 id="totalOrders">0</h3>
+<p>Total Orders</p>
+</div>
+
+<div class="summaryBox">
+<h3 id="totalSpent">₹0</h3>
+<p>Total Spent</p>
+</div>
+</div>
+
+<div id="orderContainer"></div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const supabaseClient = window.supabase.createClient(
+"https://sgabwjdydpdhjhzgncmq.supabase.co",
+"sb_publishable_uGNWbH6gSVTBbTRotRGXQQ_a7n_mtzb"
+);
+
+const userID = localStorage.getItem("userID");
+
+if(!userID){
+location.href="index.html";
+}
+
+/* DATE FORMAT */
+function formatDate(date){
+if(!date) return "-";
+return new Date(date).toLocaleString();
+}
+
+/* LOAD ORDERS */
+async function loadOrders(){
+
+let { data } = await supabaseClient
+.from("ORDER")
+.select("*")
+.eq("USERID", userID)
+.order("ORDERID",{ascending:false});
+
+const container=document.getElementById("orderContainer");
+container.innerHTML="";
+
+if(!data || data.length===0){
+container.innerHTML=`
+<div class="empty">
+<h3>📦 No Orders Yet</h3>
+<p>Start your first order 🚀</p>
+</div>`;
+return;
+}
+
+let totalSpent=0;
+
+document.getElementById("totalOrders").innerText=data.length;
+
+data.forEach(o=>{
+
+totalSpent += parseFloat(o.PRICE) || 0;
+
+let statusClass="pending";
+
+if((o.STATUS||"").toLowerCase().includes("complete")) statusClass="completed";
+if((o.STATUS||"").toLowerCase().includes("cancel")) statusClass="cancelled";
+
+container.innerHTML += `
+<div class="orderCard">
+
+<div class="row">
+<strong>${o.SERVICE}</strong>
+<span class="status ${statusClass}">${o.STATUS || "Pending"}</span>
+</div>
+
+<div class="row">
+<span>Order ID:</span>
+<span>${o.ORDERID}</span>
+</div>
+
+<div class="row">
+<span>User ID:</span>
+<span>${o.USERID}</span>
+</div>
+
+<div class="row">
+<span>Quantity:</span>
+<span>${o.QUANTITY}</span>
+</div>
+
+<div class="row">
+<span>Price:</span>
+<span>₹${o.PRICE}</span>
+</div>
+
+<div class="row">
+<span>Date:</span>
+<span>${formatDate(o.DATE)}</span>
+</div>
+
+<div class="row">
+<span>Link:</span>
+<span>${o.LINK ? `<a href="${o.LINK}" target="_blank" style="color:#FFD700">View</a>` : "-"}</span>
+</div>
+
+</div>
+`;
+
+});
+
+document.getElementById("totalSpent").innerText="₹"+totalSpent.toFixed(2);
+
+}
+
+loadOrders();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Settings • GrowX</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+min-height:100vh;
+background: radial-gradient(circle at top,#0b1d3a,#020814);
+color:#fff;
+display:flex;
+flex-direction:column;
+overflow:hidden;
+}
+
+/* HEADER */
+.header{
+height:65px;
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+background:rgba(255,215,0,.05);
+backdrop-filter:blur(20px);
+border-bottom:1px solid rgba(255,215,0,.2);
+}
+
+.back{
+position:absolute;
+left:15px;
+font-size:22px;
+cursor:pointer;
+transition:.3s;
+}
+
+.back:hover{
+transform:translateX(-4px);
+}
+
+.title{
+font-size:22px;
+font-weight:700;
+background:linear-gradient(90deg,#FFD700,#fff,#FFD700);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+/* CONTENT */
+.content{
+flex:1;
+display:flex;
+justify-content:center;
+padding:20px;
+}
+
+/* CARD */
+.card{
+width:100%;
+max-width:420px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(25px);
+border-radius:30px;
+padding:25px;
+border:1px solid rgba(255,255,255,.1);
+box-shadow:
+0 0 40px rgba(255,215,0,.2),
+0 0 80px rgba(255,215,0,.1);
+}
+
+/* PROFILE */
+.profile{
+text-align:center;
+margin-bottom:20px;
+}
+
+.avatar{
+width:70px;
+height:70px;
+border-radius:50%;
+background:linear-gradient(135deg,#FFD700,#FFB800);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+margin:auto;
+box-shadow:0 0 20px rgba(255,215,0,.6);
+}
+
+.userid{
+margin-top:10px;
+font-size:14px;
+opacity:.8;
+}
+
+/* OPTIONS */
+.option{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:16px;
+border-radius:20px;
+margin-bottom:12px;
+background:rgba(255,255,255,.05);
+cursor:pointer;
+transition:.25s;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.option:hover{
+transform:translateY(-3px);
+box-shadow:0 0 15px rgba(255,215,0,.4);
+}
+
+.left{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.icon{
+font-size:20px;
+}
+
+/* DIVIDER */
+.divider{
+margin:15px 0;
+height:1px;
+background:rgba(255,255,255,.1);
+}
+
+/* LOGOUT */
+.logout{
+margin-top:10px;
+width:100%;
+padding:15px;
+border:none;
+border-radius:25px;
+font-weight:700;
+background:linear-gradient(135deg,#ff3b3b,#ff0000);
+color:#fff;
+cursor:pointer;
+transition:.3s;
+box-shadow:0 0 20px rgba(255,0,0,.4);
+}
+
+.logout:hover{
+transform:translateY(-2px);
+box-shadow:0 0 30px rgba(255,0,0,.6);
+}
+
+.logout:active{
+transform:scale(.96);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<div class="back" onclick="go('home.html')">←</div>
+<div class="title">Settings</div>
+</div>
+
+<div class="content">
+<div class="card">
+
+<!-- PROFILE -->
+<div class="profile">
+<div class="avatar">👤</div>
+<div class="userid" id="uid">User ID</div>
+</div>
+
+<!-- MENU -->
+<div class="option" onclick="go('home.html')">
+<div class="left"><span class="icon">🏠</span> Home</div> →
+</div>
+
+<div class="option" onclick="go('order.html')">
+<div class="left"><span class="icon">🚀</span> New Order</div> →
+</div>
+
+<div class="option" onclick="go('addfund.html')">
+<div class="left"><span class="icon">💰</span> Add Funds</div> →
+</div>
+
+<div class="option" onclick="go('history.html')">
+<div class="left"><span class="icon">📜</span> Order History</div> →
+</div>
+
+<div class="option" onclick="go('customer.html')">
+<div class="left"><span class="icon">💬</span> Customer Support</div> →
+</div>
+
+<div class="divider"></div>
+
+<button class="logout" onclick="logout()">Logout</button>
+
+</div>
+</div>
+
+<script>
+
+const userID=localStorage.getItem("userID");
+
+if(!userID){
+window.location.replace("index.html");
+}else{
+document.getElementById("uid").innerText = "User ID: " + userID;
+}
+
+function go(page){
+window.location.replace(page);
+}
+
+function logout(){
+localStorage.removeItem("userID");
+window.location.replace("index.html");
+}
+
+</script>
+
+</body>
+</html>

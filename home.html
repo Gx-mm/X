@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GrowX Premium Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+background: radial-gradient(circle at top,#0b1d3a,#020814);
+color:white;
+padding:20px;
+overflow-x:hidden;
+}
+
+/* particles */
+.particle{
+position:fixed;
+width:3px;
+height:3px;
+background:white;
+border-radius:50%;
+opacity:0.4;
+animation:float 8s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh)}
+100%{transform:translateY(-10vh)}
+}
+
+/* header */
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.logo{
+font-size:26px;
+font-weight:600;
+}
+
+.icons{
+display:flex;
+gap:15px;
+}
+
+/* card */
+.card{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(15px);
+border-radius:18px;
+padding:25px;
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:
+0 0 10px rgba(0,150,255,0.3),
+0 0 20px rgba(0,150,255,0.3);
+}
+
+/* layout */
+.top{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+margin-bottom:25px;
+}
+
+.balance{
+font-size:36px;
+margin-top:10px;
+font-weight:600;
+}
+
+/* buttons */
+.actions{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+align-items:center;
+}
+
+.btn{
+padding:12px 22px;
+border-radius:40px;
+border:1px solid rgba(255,255,255,0.2);
+background:rgba(255,255,255,0.05);
+color:white;
+cursor:pointer;
+box-shadow:
+0 0 10px rgba(255,180,0,0.6),
+0 0 20px rgba(255,180,0,0.4);
+}
+
+/* stats */
+.stats{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+margin-bottom:30px;
+}
+
+/* services */
+.title{
+font-size:22px;
+margin-bottom:20px;
+}
+
+.services{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+.service{
+text-align:center;
+}
+
+.icon img{
+width:40px;
+margin-bottom:10px;
+}
+
+.buy{
+margin-top:12px;
+padding:10px 18px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+background:linear-gradient(45deg,#ffcc33,#ff6600);
+box-shadow:0 0 15px rgba(255,170,0,0.9);
+}
+
+/* footer */
+.footer{
+text-align:center;
+margin-top:40px;
+opacity:0.6;
+font-size:13px;
+}
+
+@media(max-width:700px){
+.top{grid-template-columns:1fr;}
+.stats{grid-template-columns:1fr;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<div class="logo">GrowX</div>
+
+<div class="icons">
+<div onclick="location.href='notification.html'" style="cursor:pointer;font-size:22px">🔔</div>
+<div onclick="location.href='setting.html'" style="cursor:pointer;font-size:22px">⚙</div>
+</div>
+</div>
+
+<div class="top">
+
+<div class="card">
+<h2 id="welcome">Welcome 👋</h2>
+
+<p>
+User ID: <span id="userid"></span>
+<span style="color:#00ff9c;">✔ Verified</span>
+</p>
+
+<p style="opacity:0.7;margin-top:15px;">Available Balance</p>
+<div class="balance" id="balance">₹0</div>
+</div>
+
+<div class="actions">
+<button class="btn" onclick="location.href='addfund.html'">💳 Wallet</button>
+<button class="btn" onclick="location.href='order.html'">🛒 New Order</button>
+<button class="btn" onclick="location.href='history.html'">🕘 History</button>
+</div>
+
+</div>
+
+<div class="stats">
+<div class="card"><h2>9999+</h2><p>Total Orders</p></div>
+<div class="card"><h2>9999+</h2><p>Completed Orders</p></div>
+</div>
+
+<!-- ✅ UPDATED -->
+<div class="title">Our Popular Services</div>
+
+<div class="services">
+
+<div class="card service">
+<div class="icon">
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png">
+</div>
+<h3>Instagram</h3>
+<p>100K Reel Views - ₹8 ONLY</p>
+<button class="buy" onclick="location.href='order.html'">Buy Now</button>
+</div>
+
+<div class="card service">
+<div class="icon">
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png">
+</div>
+<h3>Instagram</h3>
+<p>10K Followers - ₹60 ONLY</p>
+<button class="buy" onclick="location.href='order.html'">Buy Now</button>
+</div>
+
+<div class="card service">
+<div class="icon">
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png">
+</div>
+<h3>Instagram</h3>
+<p>100K Post/Reel Likes - ₹100 ONLY</p>
+<button class="buy" onclick="location.href='order.html'">Buy Now</button>
+</div>
+
+<div class="card service">
+<div class="icon">
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png">
+</div>
+<h3>Instagram</h3>
+<p>100K Story Views - ₹150 ONLY</p>
+<button class="buy" onclick="location.href='order.html'">Buy Now</button>
+</div>
+
+</div>
+
+<div class="footer">
+© 2026 GrowX • All Rights Reserved
+</div>
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const supabaseClient = window.supabase.createClient(
+"https://sgabwjdydpdhjhzgncmq.supabase.co",
+"sb_publishable_uGNWbH6gSVTBbTRotRGXQQ_a7n_mtzb"
+);
+
+const userID = localStorage.getItem("userID");
+
+if(!userID){
+location.href="index.html";
+}
+
+async function loadUser(){
+
+let { data } = await supabaseClient
+.from("USER")
+.select("*")
+.eq("USERID", userID)
+.single();
+
+if(data){
+document.getElementById("welcome").innerText = "Welcome " + data.USERNAME + " 👋";
+document.getElementById("userid").innerText = data.USERID;
+document.getElementById("balance").innerText = "₹" + parseFloat(data.BALANCE).toFixed(3);
+}
+
+}
+
+loadUser();
+
+/* particles */
+for(let i=0;i<40;i++){
+let p=document.createElement("div");
+p.className="particle";
+p.style.left=Math.random()*100+"vw";
+p.style.animationDuration=(5+Math.random()*6)+"s";
+document.body.appendChild(p);
+}
+
+</script>
+
+</body>
+</html>

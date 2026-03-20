@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Support • GrowX</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+background: radial-gradient(circle at top,#0b1d3a,#020814);
+color:white;
+}
+
+/* TOPBAR */
+.topbar{
+height:70px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(20px);
+border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+.brand{
+font-size:22px;
+font-weight:700;
+color:#00c3ff;
+text-shadow:0 0 15px #00c3ff;
+}
+
+.container{padding:20px;}
+
+/* CARD */
+.card{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+backdrop-filter:blur(20px);
+border-radius:25px;
+padding:20px;
+margin-bottom:20px;
+box-shadow:0 0 25px rgba(0,150,255,.2);
+}
+
+.title{
+font-size:22px;
+font-weight:700;
+color:#00c3ff;
+margin-bottom:10px;
+}
+
+.badge{
+background:#00ff8822;
+color:#00ff88;
+padding:6px 12px;
+border-radius:20px;
+font-size:13px;
+display:inline-block;
+margin-bottom:10px;
+}
+
+/* BUTTON */
+.btn{
+margin-top:10px;
+padding:12px;
+border:none;
+width:100%;
+border-radius:20px;
+font-weight:600;
+background:linear-gradient(45deg,#00c3ff,#00ffcc);
+color:#000;
+cursor:pointer;
+}
+
+/* FAQ */
+.faq-item{
+margin-top:10px;
+background:rgba(255,255,255,0.08);
+padding:12px;
+border-radius:15px;
+cursor:pointer;
+}
+
+.faq-answer{
+margin-top:6px;
+font-size:14px;
+opacity:.8;
+max-height:0;
+overflow:hidden;
+transition:.4s;
+}
+
+/* WHATSAPP */
+.whatsapp-btn{
+display:block;
+margin-top:10px;
+padding:14px;
+border-radius:20px;
+background:#25D366;
+text-align:center;
+color:white;
+font-weight:600;
+}
+
+/* FLOAT */
+.chat-float{
+position:fixed;
+bottom:20px;
+right:20px;
+width:60px;
+height:60px;
+border-radius:50%;
+background:#00c3ff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:25px;
+color:black;
+cursor:pointer;
+box-shadow:0 0 20px #00c3ff;
+}
+
+/* CHAT POPUP (UNCHANGED SIZE) */
+#chatPopup{
+position:fixed;
+bottom:80px;
+right:20px;
+width:320px;
+height:420px;
+background:#020814;
+border-radius:20px;
+display:none;
+flex-direction:column;
+box-shadow:0 0 40px #00c3ff;
+z-index:999;
+}
+
+.chat-header{
+padding:12px;
+background:#00c3ff;
+color:black;
+display:flex;
+justify-content:space-between;
+border-radius:20px 20px 0 0;
+}
+
+#chat{
+flex:1;
+overflow:auto;
+padding:10px;
+}
+
+.bot{
+background:#111;
+padding:8px;
+margin:5px 0;
+border-radius:10px;
+}
+
+.commands{
+display:flex;
+flex-wrap:wrap;
+gap:6px;
+padding:10px;
+}
+
+.commands button{
+flex:1;
+padding:8px;
+border:none;
+border-radius:10px;
+background:#111;
+color:#00c3ff;
+border:1px solid #00c3ff;
+}
+
+/* 🔥 PREMIUM POPUP */
+#popupBox{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+.popup-inner{
+background:#020814;
+padding:20px;
+border-radius:15px;
+width:280px;
+box-shadow:0 0 25px #00c3ff;
+}
+
+.popup-inner input{
+width:100%;
+padding:10px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+background:#111;
+color:white;
+}
+
+.popup-btns{
+display:flex;
+gap:10px;
+margin-top:10px;
+}
+
+.popup-btns button{
+flex:1;
+padding:10px;
+border:none;
+border-radius:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+<div class="brand">GrowX Support</div>
+</div>
+
+<div class="container">
+
+<div class="card">
+<div class="title">Customer Support</div>
+<p>
+Welcome to GrowX Support 💬<br><br>
+We are here 24/7 to help you with orders, payments and account issues.
+Use AI bot below for instant help.
+</p>
+<div class="badge">⚡ Instant AI Support</div>
+</div>
+
+<div class="card">
+<div class="title">WhatsApp Support</div>
+<div class="badge">🟢 Online</div>
+
+<a href="https://wa.me/7800584153" class="whatsapp-btn" target="_blank">
+💬 Chat Now
+</a>
+</div>
+
+<div class="card">
+<div class="title">Email Support</div>
+
+<p id="mail1">hardffm90@gmail.com</p>
+<button class="btn" onclick="copyMail('mail1')">Copy</button>
+
+<p style="margin-top:10px" id="mail2">hardffm91@gmail.com</p>
+<button class="btn" onclick="copyMail('mail2')">Copy</button>
+</div>
+
+<div class="card">
+<div class="title">FAQ</div>
+
+<div class="faq-item" onclick="toggleFaq(this)">
+Order kitne time me complete hota hai?
+<div class="faq-answer">5–60 minutes</div>
+</div>
+
+<div class="faq-item" onclick="toggleFaq(this)">
+Password dena padega?
+<div class="faq-answer">Never</div>
+</div>
+
+<div class="faq-item" onclick="toggleFaq(this)">
+Refund milta hai?
+<div class="faq-answer">Yes</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="chat-float" onclick="openChat()">💬</div>
+
+<div id="chatPopup">
+
+<div class="chat-header">
+🤖 AI Support
+<span onclick="closeChat()">❌</span>
+</div>
+
+<div id="chat"></div>
+
+<div class="commands">
+<button onclick="run('balance')">💰</button>
+<button onclick="run('order')">📦</button>
+<button onclick="run('payment')">💳</button>
+<button onclick="run('pass')">🔒</button>
+<button onclick="run('user')">👤</button>
+<button onclick="run('wa')">📞</button>
+</div>
+
+</div>
+
+<!-- 🔥 POPUP -->
+<div id="popupBox">
+<div class="popup-inner">
+<h3 id="popupTitle"></h3>
+<input id="popupInput">
+<div class="popup-btns">
+<button onclick="closePopup()">Cancel</button>
+<button onclick="submitPopup()">OK</button>
+</div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const supabaseClient = window.supabase.createClient(
+"https://sgabwjdydpdhjhzgncmq.supabase.co",
+"sb_publishable_uGNWbH6gSVTBbTRotRGXQQ_a7n_mtzb"
+);
+
+const userID = localStorage.getItem("userID");
+
+/* CHAT */
+function openChat(){ chatPopup.style.display="flex"; }
+
+/* 🔥 RESET FIX */
+function closeChat(){
+chatPopup.style.display="none";
+chat.innerHTML=""; // RESET
+}
+
+/* BOT */
+function addBot(msg){
+chat.innerHTML+=`<div class="bot">${msg}</div>`;
+chat.scrollTop=chat.scrollHeight;
+}
+
+/* POPUP */
+let type="";
+function openPopup(t){
+type=t;
+popupBox.style.display="flex";
+
+if(t==="pass") popupTitle.innerText="Enter New Password";
+if(t==="user") popupTitle.innerText="Enter New Username";
+}
+
+function closePopup(){
+popupBox.style.display="none";
+popupInput.value="";
+}
+
+async function submitPopup(){
+
+if(type==="pass"){
+await supabaseClient.from("USER")
+.update({PASSWORD:popupInput.value}).eq("USERID",userID);
+addBot("🔒 Password Updated");
+}
+
+if(type==="user"){
+await supabaseClient.from("USER")
+.update({USERNAME:popupInput.value}).eq("USERID",userID);
+addBot("👤 Username Updated");
+}
+
+closePopup();
+}
+
+/* COMMAND */
+async function run(cmd){
+
+if(cmd==="balance"){
+let {data}=await supabaseClient.from("USER")
+.select("BALANCE").eq("USERID",userID).single();
+
+addBot("💰 Balance: ₹"+data.BALANCE);
+}
+
+else if(cmd==="order"){
+let {data}=await supabaseClient.from("ORDER")
+.select("*").eq("USERID",userID);
+
+let txt="📦 Orders:<br>";
+data.forEach(o=>{
+txt+=o.ORDERID+" → "+o.STATUS+"<br>";
+});
+addBot(txt);
+}
+
+else if(cmd==="payment"){
+let {data}=await supabaseClient.from("PAYMENT")
+.select("*").eq("USERID",userID);
+
+let txt="💳 Payments:<br>";
+data.forEach(p=>{
+txt+="₹"+p.AMOUNT+" → "+p.STATUS+"<br>";
+});
+addBot(txt);
+}
+
+else if(cmd==="pass"){
+openPopup("pass"); // 🔥 FIX
+}
+
+else if(cmd==="user"){
+openPopup("user"); // 🔥 FIX
+}
+
+else if(cmd==="wa"){
+window.open("https://wa.me/7800584153");
+}
+
+}
+
+/* COPY */
+function copyMail(id){
+let t=document.getElementById(id).innerText;
+navigator.clipboard.writeText(t);
+alert("Copied");
+}
+
+/* FAQ */
+function toggleFaq(el){
+let ans=el.querySelector(".faq-answer");
+ans.style.maxHeight=ans.style.maxHeight?null:ans.scrollHeight+"px";
+}
+
+</script>
+
+</body>
+</html>

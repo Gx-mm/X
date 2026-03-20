@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GrowX Terms & Conditions</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background: radial-gradient(circle at top,#0b1d3a,#020814);
+display:flex;
+color:white;
+}
+
+/* SIDEBAR */
+.sidebar{
+position:fixed;
+left:0;
+top:0;
+width:230px;
+height:100vh;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(20px);
+padding:25px;
+box-shadow:0 0 20px rgba(0,200,255,.2);
+}
+
+.logo{
+font-size:20px;
+font-weight:600;
+color:#00c3ff;
+margin-bottom:25px;
+text-shadow:0 0 10px #00c3ff;
+}
+
+.sidebar a{
+display:block;
+padding:10px;
+margin-bottom:6px;
+text-decoration:none;
+color:#aaa;
+border-radius:8px;
+font-size:14px;
+transition:.25s;
+}
+
+.sidebar a:hover{
+background:#00c3ff;
+color:black;
+}
+
+.sidebar a.active{
+background:#00c3ff;
+color:black;
+box-shadow:0 0 10px #00c3ff;
+}
+
+/* CONTENT */
+.content{
+margin-left:250px;
+padding:30px;
+max-width:900px;
+}
+
+.title{
+font-size:30px;
+font-weight:600;
+margin-bottom:10px;
+color:#00c3ff;
+text-shadow:0 0 10px #00c3ff;
+}
+
+.meta{
+color:#aaa;
+margin-bottom:25px;
+}
+
+/* CARD */
+.card{
+background:rgba(255,255,255,0.05);
+padding:25px;
+border-radius:14px;
+margin-bottom:20px;
+box-shadow:0 0 25px rgba(0,150,255,.2);
+
+transform:translateY(40px);
+opacity:0;
+transition:all .6s cubic-bezier(.22,1,.36,1);
+}
+
+.card.show{
+transform:translateY(0);
+opacity:1;
+}
+
+.card:hover{
+transform:translateY(-4px);
+box-shadow:0 0 40px rgba(0,200,255,.3);
+}
+
+.card h2{
+font-size:18px;
+margin-bottom:10px;
+color:#00c3ff;
+}
+
+.card p{
+line-height:1.7;
+color:#ccc;
+}
+
+ul{
+margin-top:10px;
+padding-left:20px;
+}
+
+li{
+margin-bottom:6px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+.sidebar{
+position:fixed;
+bottom:0;
+top:auto;
+width:100%;
+height:60px;
+display:flex;
+overflow-x:auto;
+padding:10px;
+}
+
+.logo{display:none;}
+
+.sidebar a{
+flex:1;
+text-align:center;
+font-size:12px;
+margin:0;
+}
+
+.content{
+margin-left:0;
+padding:20px;
+margin-bottom:70px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<div class="logo">GrowX Terms</div>
+
+<a href="#intro">Introduction</a>
+<a href="#agreement">Agreement</a>
+<a href="#account">Account</a>
+<a href="#security">Security</a>
+<a href="#payment">Payment</a>
+<a href="#order">Order</a>
+<a href="#refund">Refund</a>
+<a href="#service">Service</a>
+<a href="#prohibited">Rules</a>
+<a href="#suspend">Suspension</a>
+<a href="#liability">Liability</a>
+<a href="#changes">Updates</a>
+<a href="#contact">Contact</a>
+
+</div>
+
+<div class="content">
+
+<div class="title">Terms & Conditions – GrowX</div>
+<div class="meta">Last Updated: 2026</div>
+
+<!-- INTRO -->
+<div class="card" id="intro">
+<h2>Introduction</h2>
+<p>
+Welcome to GrowX. By using our platform, you agree to follow all the terms and conditions mentioned below.
+</p>
+</div>
+
+<!-- AGREEMENT -->
+<div class="card" id="agreement">
+<h2>User Agreement</h2>
+<p>
+By creating an account on GrowX, you automatically agree to all our Terms & Conditions, Privacy Policy, and service rules.
+If you do not agree, please do not use our platform.
+</p>
+</div>
+
+<!-- ACCOUNT -->
+<div class="card" id="account">
+<h2>Account Policy</h2>
+<ul>
+<li>Users must provide correct information</li>
+<li>Multiple accounts are not allowed</li>
+<li>Users are responsible for their accounts</li>
+</ul>
+</div>
+
+<!-- SECURITY -->
+<div class="card" id="security">
+<h2>Security Policy</h2>
+<p>
+GrowX never asks for your social media passwords. Only public links are required.
+</p>
+</div>
+
+<!-- PAYMENT -->
+<div class="card" id="payment">
+<h2>Payment Terms</h2>
+<ul>
+<li>Valid UTR / Transaction ID required</li>
+<li>Duplicate UTR not allowed</li>
+<li>Incorrect payments are user responsibility</li>
+</ul>
+</div>
+
+<!-- ORDER -->
+<div class="card" id="order">
+<h2>Order Terms</h2>
+<ul>
+<li>Account must be public</li>
+<li>Correct link required</li>
+<li>Delay may occur in services</li>
+</ul>
+</div>
+
+<!-- REFUND -->
+<div class="card" id="refund">
+<h2>Refund Policy</h2>
+<ul>
+<li>Only failed orders are refundable</li>
+<li>Completed orders are not refundable</li>
+<li>Refunds are added to wallet only</li>
+</ul>
+</div>
+
+<!-- SERVICE -->
+<div class="card" id="service">
+<h2>Service Disclaimer</h2>
+<p>
+GrowX does not guarantee permanent results. Followers, likes, or views may drop over time.
+</p>
+</div>
+
+<!-- RULES -->
+<div class="card" id="prohibited">
+<h2>Prohibited Activities</h2>
+<ul>
+<li>No fraud or abuse</li>
+<li>No system manipulation</li>
+<li>No spam activities</li>
+</ul>
+</div>
+
+<!-- SUSPENSION -->
+<div class="card" id="suspend">
+<h2>Account Suspension</h2>
+<p>
+GrowX reserves the right to suspend or terminate any account without prior notice if rules are violated.
+</p>
+</div>
+
+<!-- LIABILITY -->
+<div class="card" id="liability">
+<h2>Limitation of Liability</h2>
+<p>
+GrowX is not responsible for any loss, damage, or delay caused while using our services.
+</p>
+</div>
+
+<!-- CHANGES -->
+<div class="card" id="changes">
+<h2>Changes to Terms</h2>
+<p>
+GrowX may update these terms anytime. Continued use means you accept updated terms.
+</p>
+</div>
+
+<!-- CONTACT -->
+<div class="card" id="contact">
+<h2>Contact Us</h2>
+<p>
+For support, contact us via WhatsApp, Email, or in-app support.
+</p>
+</div>
+
+</div>
+
+<script>
+
+/* animation */
+const cards=document.querySelectorAll(".card");
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}
+});
+},{threshold:0.15});
+
+cards.forEach(card=>observer.observe(card));
+
+</script>
+
+</body>
+</html>
